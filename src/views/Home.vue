@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container-home">
         <header>
             <h1>
                 Le/Tip
@@ -36,8 +36,19 @@ export default {
 }
 </script>
 
-<style scoped>
-    .container-conteudo {
+<style>
+    .container-home {
+        height: calc(100vh - 30px);
+    }
+
+    .container-home > header {
+        padding: 15px;
+        text-align: center;
+    }
+
+    .container-home > .container-conteudo {
+        width: 100vw;
         display: flex;
+        justify-content: space-between;
     }
 </style>

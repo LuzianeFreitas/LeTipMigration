@@ -1,19 +1,25 @@
 <template>
-    <div>
+    <div class="container-result">
         <div>
             Conta
-            {{formatCoin(result.totalSpend)}}
+            <span>
+                {{formatCoin(result.totalSpend)}}
+            </span>
         </div>
         <div>
             Gorjeta
-            {{formatCoin(result.tip)}}
+            <span>
+                {{formatCoin(result.tip)}}
+            </span>
         </div>
         <div>
             Total
-            {{formatCoin(result.total)}}
+            <span>
+                {{formatCoin(result.total)}}
+            </span>
         </div>
         <div>
-            Por Pessoa
+            Por Pessoa      
             {{formatCoin(result.totalPerson)}}
         </div>
         <div>
@@ -41,5 +47,7 @@ export default {
 </script>
 
 <style scoped>
-    
+    .container-result {
+        width: 100%;
+    }
 </style>

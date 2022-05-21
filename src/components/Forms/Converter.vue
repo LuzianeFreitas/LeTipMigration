@@ -1,4 +1,5 @@
 <template>
+<div class="container-form">
     <form>
         <div>
             EUR
@@ -25,6 +26,7 @@
             </span>
         </div>
     </form>
+</div>
 </template>
 
 <script>
@@ -108,6 +110,9 @@ export default {
 </script>
 
 <style scoped>
+    .container-form {
+        width: 100%;
+    }
     .input-converter {
         display: flex;
         flex-direction: column;
