@@ -7,8 +7,8 @@
         </header>
 
         <main class="container-conteudo">
-            <converter/>
-            <result/>
+            <converter @dataResults="getResult"/>
+            <result :result="result"/>
         </main>
     </div>
 </template>
@@ -22,7 +22,17 @@ export default {
     components: {
         Converter,
         Result
-    }
+    },
+    data() {
+        return {
+            result: {}
+        }
+    },
+    methods: {
+        getResult(result) {
+            this.result = result;
+        }
+    },
 }
 </script>
 
