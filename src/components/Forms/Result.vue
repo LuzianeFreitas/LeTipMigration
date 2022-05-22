@@ -3,31 +3,31 @@
         <div class="field-result">
             Conta
             <strong>
-                {{formatCoin(result.totalSpend)}}
+                {{formatCoin(result.totalSpend,this.result.coinSelect)}}
             </strong>
         </div>
         <div class="field-result">
             Gorjeta
             <strong>
-                {{formatCoin(result.tip)}}
+                {{formatCoin(result.tip,this.result.coinSelect)}}
             </strong>
         </div>
         <div class="field-result">
             Total
             <strong>
-                {{formatCoin(result.total)}}
+                {{formatCoin(result.total,this.result.coinSelect)}}
             </strong>
         </div>
         <div class="field-result">
             Por Pessoa 
             <strong>
-                {{formatCoin(result.totalPerson)}}
+                {{formatCoin(result.totalPerson,this.result.coinSelect)}}
             </strong>     
         </div>
         <div class="field-result">
             Por Pessoa em R$
             <strong>
-                {{result.totalPersonConvert}}
+                {{formatCoin(result.totalPersonConvert, 'BRL')}}
             </strong>
         </div>
 
@@ -41,9 +41,9 @@ export default {
         result: {}
     },
     methods: {
-        formatCoin(coin) {
+        formatCoin(coin,typeCoin) {
             if(coin != undefined) {
-                return new Intl.NumberFormat('de-DE', { style: 'currency', currency: this.result.coinSelect }).format(coin);
+                return new Intl.NumberFormat('de-DE', { style: 'currency', currency: typeCoin }).format(coin);
             }
         }
     }

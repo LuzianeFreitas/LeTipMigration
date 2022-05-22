@@ -73,23 +73,35 @@ export default {
             }, 2000);
         },
         getConvert() {
-            // let baseURI = `https://v1.nocodeapi.com/luziane/cx/KAAhQTPFWkIqJhlX/rates/convert?amount=${this.calcPerPerson}from=${this.coinSelect}&to=BRL`;
+            let baseURI = `https://v1.nocodeapi.com/luziane/cx/KAAhQTPFWkIqJhlX/rates/convert?amount=${this.calcPerPerson}&from=${this.form.coinSelect}&to=BRL`;
 
-            // this.$http.get(baseURI)
-            // .then((result) => {
-            //     console.log(result.data);
-            // })
+            this.$http.get(baseURI)
+            .then((result) => {
+                let convert = result.data.result.toFixed(2);
 
-            let results = {
-                coinSelect: this.form.coinSelect,
-                totalSpend: this.form.totalSpend,
-                tip: this.calcTip,
-                total: this.calcTotal,
-                totalPerson: this.calcPerPerson,
-                totalPersonConvert: 0
-            };
+                let results = {
+                    coinSelect: this.form.coinSelect,
+                    totalSpend: this.form.totalSpend,
+                    tip: this.calcTip,
+                    total: this.calcTotal,
+                    totalPerson: this.calcPerPerson,
+                    totalPersonConvert: convert
+                };
 
-            this.$emit('dataResults',results);
+                this.$emit('dataResults',results);
+
+
+                this.form.coin = false;
+                this.form.coinSelect = '';
+                this.form.totalSpend = 0;
+                this.form.tip = 10,
+                this.form.amountPeople = 2;
+                this.calcTip = 0;
+                this.calcTotal = 0;
+                this.calcPerPerson = 0;
+                this.time = null;
+
+            })
         },
     },
     computed: {
