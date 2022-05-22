@@ -44,6 +44,7 @@ export default {
     .container-home > header {
         padding: 15px;
         text-align: center;
+        margin: 30px 0px 30px 0px;
     }
 
     .container-home > .container-conteudo {
