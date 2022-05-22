@@ -1,30 +1,34 @@
 <template>
     <div class="container-result">
-        <div>
+        <div class="field-result">
             Conta
-            <span>
+            <strong>
                 {{formatCoin(result.totalSpend)}}
-            </span>
+            </strong>
         </div>
-        <div>
+        <div class="field-result">
             Gorjeta
-            <span>
+            <strong>
                 {{formatCoin(result.tip)}}
-            </span>
+            </strong>
         </div>
-        <div>
+        <div class="field-result">
             Total
-            <span>
+            <strong>
                 {{formatCoin(result.total)}}
-            </span>
+            </strong>
         </div>
-        <div>
-            Por Pessoa      
-            {{formatCoin(result.totalPerson)}}
+        <div class="field-result">
+            Por Pessoa 
+            <strong>
+                {{formatCoin(result.totalPerson)}}
+            </strong>     
         </div>
-        <div>
+        <div class="field-result">
             Por Pessoa em R$
-            {{result.totalPersonConvert}}
+            <strong>
+                {{result.totalPersonConvert}}
+            </strong>
         </div>
 
     </div>
@@ -49,5 +53,13 @@ export default {
 <style scoped>
     .container-result {
         width: 100%;
+    }
+
+    .container-result > .field-result {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        margin-bottom: 15px;
     }
 </style>
