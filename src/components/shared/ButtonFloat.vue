@@ -1,5 +1,5 @@
 <template>
-    <button type="text" class="button-float" @click="sendEvent" :disabled="disabledButton">
+    <button type="text" class="button-float" @click="sendEvent" :disabled="disabledButton" title="Preencha o formulário antes de ver o resultado!">
         <img :src="require('@/assets/'+icon)">
     </button>
 </template>
@@ -22,7 +22,7 @@ export default {
 <style>
     .button-float {
         position: fixed;
-        bottom:10px;
+        bottom:20px;
         right:10px;
 
         border: 0;

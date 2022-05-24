@@ -9,8 +9,10 @@
         <main class="container-conteudo">
             <converter
                 @dataResults="getResult"
+                @loaderConvert="loading"
                 class="form-enter"
                 :style="showForm"
+                :resetCalc="reset"
             />
             <result
                 :result="result"
@@ -25,6 +27,8 @@
             @change="changePage"
             class="button"
         />
+
+        <loader v-show="loader"/>
     </div>
 </template>
 
@@ -32,20 +36,24 @@
 import Converter from "../components/Forms/Converter.vue";
 import Result from "../components/Forms/Result.vue";
 import ButtonFloat from "../components/shared/ButtonFloat";
+import Loader from "../components/shared/Loader";
 
 export default {
   name: "Home",
   components: {
     Converter,
     Result,
-    ButtonFloat
+    ButtonFloat,
+    Loader
   },
   data() {
     return {
       result: {},
       next: false,
       icon: "next.svg",
-      sizeResult: 0
+      sizeResult: 0,
+      loader: false,
+      reset: false
     };
   },
   methods: {
@@ -60,7 +68,13 @@ export default {
         this.icon = "previous.svg";
       } else {
         this.icon = "next.svg";
+        this.reset = true;
+        this.sizeResult = 0;
+        this.result = {};
       }
+    },
+    loading(loader) {
+      this.loader = loader;
     }
   },
   computed: {

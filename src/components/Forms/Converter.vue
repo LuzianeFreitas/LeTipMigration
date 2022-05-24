@@ -28,12 +28,22 @@
             </span>
         </div>
     </form>
+
+    <p v-show="Object.keys(results).length > 0">
+        Veja o valor da sua gorjeta clicando no botão ao lado.
+    </p>
+    <p v-show="error">
+        Ocorreu um erro durante a conversão de valores, por favor tente novamente.
+    </p>
 </div>
 </template>
 
 <script>
 export default {
     name: "Converter",
+    props: {
+        resetCalc: {type: Boolean, default: false}
+    },
     data() {
         return {
             form: {
@@ -46,7 +56,10 @@ export default {
             calcTip: 0,
             calcTotal: 0,
             calcPerPerson: 0,
-            time: null
+            time: null,
+            loader: false,
+            results: {},
+            error: false
         }
     },
     methods: {
@@ -65,7 +78,7 @@ export default {
             } else { 
                 this.form.coinSelect = 'EUR';
             }
-            
+
             window.clearTimeout(this.time);
 
             this.time = window.setTimeout(() => {
@@ -73,13 +86,14 @@ export default {
             }, 2000);
         },
         getConvert() {
+            this.$emit("loaderConvert",this.loader);
             let baseURI = `https://v1.nocodeapi.com/luziane/cx/KAAhQTPFWkIqJhlX/rates/convert?amount=${this.calcPerPerson}&from=${this.form.coinSelect}&to=BRL`;
 
             this.$http.get(baseURI)
             .then((result) => {
                 let convert = result.data.result.toFixed(2);
 
-                let results = {
+                this.results = {
                     coinSelect: this.form.coinSelect,
                     totalSpend: this.form.totalSpend,
                     tip: this.calcTip,
@@ -88,21 +102,28 @@ export default {
                     totalPersonConvert: convert
                 };
 
-                this.$emit('dataResults',results);
-
-
-                this.form.coin = false;
-                this.form.coinSelect = '';
-                this.form.totalSpend = 0;
-                this.form.tip = 10,
-                this.form.amountPeople = 2;
-                this.calcTip = 0;
-                this.calcTotal = 0;
-                this.calcPerPerson = 0;
-                this.time = null;
-
+                this.$emit('dataResults',this.results);
+                this.loader = false;
+                this.$emit("loaderConvert",this.loader);
+            }).catch(() => {
+                this.error = true;
+                this.loader = false;
+                this.$emit("loaderConvert",this.loader);
             })
         },
+        resetValues() {
+            this.form.coin = false;
+            this.form.coinSelect = '';
+            this.form.totalSpend = 0;
+            this.form.tip = 10,
+            this.form.amountPeople = 2;
+            this.calcTip = 0;
+            this.calcTotal = 0;
+            this.calcPerPerson = 0;
+            this.time = null;
+            this.results = {};
+            this.$emit('dataResults',this.results);
+        }
     },
     computed: {
         coinVerify() {
@@ -113,11 +134,19 @@ export default {
     watch: {
        form: {
             handler(val){
-                if(val.totalSpend != 0) {
+                if(val.totalSpend > 0) {
+                    this.loader = true;
                     this.calculation();
+                } else {
+                    this.resetValues();
                 }
             },
             deep: true
+       },
+       resetCalc(newValue) {
+           if(newValue) {
+               this.resetValues();
+           }
        }
     }
 }
@@ -221,5 +250,17 @@ export default {
 
     .input-range > input {
         margin: 0px 10px 0px 10px;
+    }
+
+    .container-form > p {
+        text-align: center;
+        margin-top: 30px;
+        visibility: hidden;
+    }
+
+    @media (max-width: 600px) {
+        .container-form > p {
+            visibility: visible;
+        }
     }
 </style>
