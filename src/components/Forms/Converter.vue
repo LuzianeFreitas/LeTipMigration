@@ -39,6 +39,8 @@
 </template>
 
 <script>
+import api from "../../api";
+
 export default {
     name: "Converter",
     props: {
@@ -87,9 +89,9 @@ export default {
         },
         getConvert() {
             this.$emit("loaderConvert",this.loader);
-            let baseURI = `https://v1.nocodeapi.com/luziane/cx/KAAhQTPFWkIqJhlX/rates/convert?amount=${this.calcPerPerson}&from=${this.form.coinSelect}&to=BRL`;
+            const paramsURL = `?amount=${this.calcPerPerson}&from=${this.form.coinSelect}&to=BRL`;
 
-            this.$http.get(baseURI)
+            api.get(paramsURL)
             .then((result) => {
                 let convert = result.data.result.toFixed(2);
 
