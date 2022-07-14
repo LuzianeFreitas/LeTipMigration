@@ -154,110 +154,113 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .container-form {
         width: 100%;
-    }
-    .form > .input-converter {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
 
-        margin-bottom: 15px;
-    }
+        p {
+            text-align: center;
+            margin-top: 30px;
+            visibility: hidden;
+        }
 
-    .input-converter > .input-switch {
-        display: flex;
-        align-items: center;
-    }
+        .form > .input-converter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
 
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 25px;
+            margin-bottom: 15px;
 
-        margin: 0px 10px 0px 10px;
-    }
+            .input-switch {
+                display: flex;
+                align-items: center;
+            }
+        }
 
-    .switch > input { 
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 25px;
 
-    .switch > .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+            margin: 0px 10px 0px 10px;
 
-    .switch > .slider:before {
-        position: absolute;
-        content: "";
-        height: 15px;
-        width: 15px;
-        left: 9px;
-        bottom: 5px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+            input { 
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
 
-    .switch > input:checked + .slider {
-        background-color: #2196F3;
-    }
+            .slider {
+                position: absolute;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #ccc;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
 
-    .switch > input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
-    }
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 15px;
+                width: 15px;
+                left: 9px;
+                bottom: 5px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
 
-    .switch > input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
+            input:checked + .slider {
+                background-color: #2196F3;
+            }
 
-    .switch > .slider.round {
-        border-radius: 34px;
-    }
+            input:focus + .slider {
+                box-shadow: 0 0 1px #2196F3;
+            }
 
-    .switch > .slider.round:before {
-        border-radius: 50%;
-    }
+            input:checked + .slider:before {
+                -webkit-transform: translateX(26px);
+                -ms-transform: translateX(26px);
+                transform: translateX(26px);
+            }
 
-    .input-converter > #total-spend {
-        border: 0;
-        outline: none;
-        border: 1px solid #c1c1c1;
-        border-radius: 10px;
-        padding: 10px;
-    }
+            .slider.round {
+                border-radius: 34px;
+            }
 
-    .input-converter > input[type=number]::-webkit-inner-spin-button { 
-        -webkit-appearance: none;
-    }
+            .slider.round:before {
+                border-radius: 50%;
+            }
+        }
 
-    .input-converter > .input-range {
-        display: flex;
-        align-items: center;
-    }
+        .input-converter {
+            #total-spend {
+                border: 0;
+                outline: none;
+                border: 1px solid #c1c1c1;
+                border-radius: 10px;
+                padding: 10px;
+            }
 
-    .input-range > input {
-        margin: 0px 10px 0px 10px;
-    }
+            input[type=number]::-webkit-inner-spin-button { 
+                -webkit-appearance: none;
+            }
 
-    .container-form > p {
-        text-align: center;
-        margin-top: 30px;
-        visibility: hidden;
+            .input-range {
+                display: flex;
+                align-items: center;
+
+                input {
+                    margin: 0px 10px 0px 10px;
+                }
+            }
+        }
     }
 
     @media (max-width: 600px) {

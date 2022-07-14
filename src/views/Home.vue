@@ -94,44 +94,47 @@ export default {
 };
 </script>
 
-<style>
-.container-home {
-  height: calc(100vh - 30px);
-}
+<style lang="scss">
+  .container-home {
+    height: calc(100vh - 30px);
 
-.container-home > header {
-  padding: 15px;
-  text-align: center;
-  margin: 30px 0px 30px 0px;
-}
+    header {
+      padding: 15px;
+      text-align: center;
+      margin: 30px 0px 30px 0px;
+    }
 
-.container-home > .container-conteudo {
-  width: 100vw;
-  display: flex;
-  justify-content: space-between;
-}
+    .container-conteudo {
+      width: 100vw;
+      display: flex;
+      justify-content: space-between;
+    }
 
-@media (max-width: 600px) {
-  .container-conteudo > .result {
-    visibility: var(--show-result);
-    display: var(--show-display);
   }
 
-  .container-conteudo > .form-enter {
-    visibility: var(--show-form);
-    display: var(--show-display-form);
+  @media (max-width: 600px) {
+    .container-conteudo {
+      .result {
+        visibility: var(--show-result);
+        display: var(--show-display);
+      }
+
+      .form-enter {
+        visibility: var(--show-form);
+        display: var(--show-display-form);
+      }
+    }
+
+    .container-home > .button {
+      visibility: visible;
+      display: flex;
+    }
   }
 
-  .container-home > .button {
-    visibility: visible;
-    display: flex;
+  @media (min-width: 601px) {
+    .container-home > .button {
+      visibility: hidden;
+      display: none;
+    }
   }
-}
-
-@media (min-width: 601px) {
-  .container-home > .button {
-    visibility: hidden;
-    display: none;
-  }
-}
 </style>

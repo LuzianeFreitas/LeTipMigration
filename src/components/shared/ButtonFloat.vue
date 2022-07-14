@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
     .button-float {
         position: fixed;
         bottom:20px;
@@ -37,14 +37,15 @@ export default {
         cursor: pointer;
 
         transition: hover .2s;
+
+        &:hover {
+            box-shadow: 0 0 1em rgb(205, 205, 205);
+        }
+
+        img {
+            width: 24px;
+            height: 24px;
+        }
     }
 
-    .button-float:hover {
-        box-shadow: 0 0 1em rgb(205, 205, 205);
-    }
-
-    .button-float > img {
-        width: 24px;
-        height: 24px;
-    }
 </style>
