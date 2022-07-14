@@ -50,16 +50,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .container-result {
         width: 100%;
-    }
+        .field-result {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-    .container-result > .field-result {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        margin-bottom: 15px;
+            margin-bottom: 15px;
+        }
     }
 </style>

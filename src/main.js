@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios'
-import './styles/global.css'
+import './styles/global.scss'
 
 Vue.config.productionTip = false
 
