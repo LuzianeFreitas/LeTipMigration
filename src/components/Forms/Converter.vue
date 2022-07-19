@@ -55,9 +55,9 @@ export default {
                 tip: 10,
                 amountPeople: 2,
             },
-            calcTip: 0,
-            calcTotal: 0,
-            calcPerPerson: 0,
+            resultTip: 0,
+            resultTotal: 0,
+            resultPerPerson: 0,
             time: null,
             loader: false,
             results: {},
@@ -65,31 +65,34 @@ export default {
         }
     },
     methods: {
+        calcTip() {
+            this.resultTip = ((this.form.tip / 100) * this.form.totalSpend);
+            this.resultTip = parseFloat(this.resultTip.toFixed(2));
+        },
+        calcTotal() {
+            this.resultTotal = (parseFloat(this.resultTip) + parseFloat(this.form.totalSpend));
+            this.resultTotal = parseFloat(this.resultTotal.toFixed(2));
+        },
+        calcPerPerson() {
+            this.resultPerPerson = this.resultTotal / parseInt(this.form.amountPeople);
+            this.resultPerPerson = parseFloat(this.resultPerPerson.toFixed(2));
+        },
         calculation() {
-            this.calcTip = ((this.form.tip / 100) * this.form.totalSpend);
-            this.calcTip = parseFloat(this.calcTip.toFixed(2));
-
-            this.calcTotal = (parseFloat(this.calcTip) + parseFloat(this.form.totalSpend));
-            this.calcTotal = parseFloat(this.calcTotal.toFixed(2));
-
-            this.calcPerPerson = this.calcTotal / parseInt(this.form.amountPeople);
-            this.calcPerPerson = parseFloat(this.calcPerPerson.toFixed(2));
-
-            if(this.form.coin) {
-                this.form.coinSelect = 'USD';
-            } else { 
-                this.form.coinSelect = 'EUR';
-            }
+            this.calcTip();
+            this.calcTotal();
+            this.calcPerPerson();
+            
+            this.form.coinSelect = this.form.coin ? 'USD' : 'EUR';
 
             window.clearTimeout(this.time);
 
             this.time = window.setTimeout(() => {
                 this.getConvert();
-            }, 2000);
+            }, 1000);
         },
         getConvert() {
             this.$emit("loaderConvert",this.loader);
-            const paramsURL = `?amount=${this.calcPerPerson}&from=${this.form.coinSelect}&to=BRL`;
+            const paramsURL = `?amount=${this.resultPerPerson}&from=${this.form.coinSelect}&to=BRL`;
 
             api.get(paramsURL)
             .then((result) => {
@@ -98,9 +101,9 @@ export default {
                 this.results = {
                     coinSelect: this.form.coinSelect,
                     totalSpend: this.form.totalSpend,
-                    tip: this.calcTip,
-                    total: this.calcTotal,
-                    totalPerson: this.calcPerPerson,
+                    tip: this.resultTip,
+                    total: this.resultTotal,
+                    totalPerson: this.resultPerPerson,
                     totalPersonConvert: convert
                 };
 
@@ -119,9 +122,9 @@ export default {
             this.form.totalSpend = 0;
             this.form.tip = 10,
             this.form.amountPeople = 2;
-            this.calcTip = 0;
-            this.calcTotal = 0;
-            this.calcPerPerson = 0;
+            this.resultTip = 0;
+            this.resultTotal = 0;
+            this.resultPerPerson = 0;
             this.time = null;
             this.results = {};
             this.$emit('dataResults',this.results);
